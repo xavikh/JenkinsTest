@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./tests --reporter mocha-junit-reporter",
+    "test": "mocha ./test --reporter mocha-junit-reporter",
     "test-coverage": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   },
   "dependencies": {
