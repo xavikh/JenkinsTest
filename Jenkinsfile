@@ -28,7 +28,6 @@ pipeline {
               sh 'istanbul report cobertura --root coverage/ --dir ./'
               cobertura(coberturaReportFile: 'cobertura-coverage.xml')
             }
-
           }
         }
       }
@@ -36,6 +35,7 @@ pipeline {
     stage('Deploy') {
       steps {
         input(message: 'Deploy?', ok: 'Go, go, go!')
+        archiveArtifacts artifacts: '*.xml,*json', allowEmptyArchive: true
         sshagent(credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
           sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 uname -a'
           sh 'cd ~/ && git clone ' + scm.getUserRemoteConfigs() + ' && npm install -g pm2 && npm install --production && pm2 restart all'
