@@ -27,7 +27,7 @@ pipeline {
               sh 'npm run test-coverage'
               sh 'istanbul report cobertura --root coverage/ --dir ./'
               sh 'ls'
-              cobertura(coberturaReportFile: 'coverage.xml')
+              cobertura(coberturaReportFile: 'cobertura-coverage.xml')
             }
 
             sh 'ls coverage/'
