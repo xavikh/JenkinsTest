@@ -7,14 +7,13 @@ pipeline {
         nodejs('NodeJS 10.11') {
           sh 'npm install'
         }
-
       }
     }
     stage('Test') {
       steps {
         echo 'Test'
         nodejs('NodeJS 10.11') {
-          sh 'newman run postman_collection.json  --exitcode 1'
+          sh 'npm test'
         }
 
       }
@@ -22,7 +21,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
-        sh 'ssh userName@development-server-ip && cd /your-project-path && git pull       && npm install -g pm2 &&  npm install --production && pm2 restart all'
+        sh 'ssh userName@development-server-ip && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
       }
     }
   }
