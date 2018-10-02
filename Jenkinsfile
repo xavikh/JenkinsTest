@@ -22,6 +22,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploy'
+        sh 'ssh userName@development-server-ip && cd /your-project-path && git pull       && npm install -g pm2 &&  npm install --production && pm2 restart all'
       }
     }
   }
