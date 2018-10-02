@@ -35,12 +35,12 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'Deploy'
         input(message: 'Deploy?', ok: 'Go, go, go!')
-        sshagent (credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 uname -a'
+        sshagent(credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
+          sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 uname -a'
+          sh 'cd ~/ && git clone  "" && npm install -g pm2 && npm install --production && pm2 restart all'
         }
-        sh '#ssh superamo@192.168.0.24 && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
+
       }
     }
   }
