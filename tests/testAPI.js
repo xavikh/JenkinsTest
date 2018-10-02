@@ -4,23 +4,23 @@ const request = require('supertest')(app);
 
 
 describe('POST /user', function() {
-    it('user.name should be an case-insensitive match for "john"', function(done) {
+    it('Valid user', function(done) {
         request
             .get('/')
             .expect(200, done);
     });
 });
 
-describe('POST /user', function() {
-    it('user.name should be an case-insensitive match for "john"', function(done) {
+describe('POST /product', function() {
+    it('Valid Product', function(done) {
         request
             .get('/')
             .expect(200, done);
     });
 });
 
-describe('POST /user', function() {
-    it('user.name should be an case-insensitive match for "john"', function(done) {
+describe('POST /purchase', function() {
+    it('Valid Purchase', function(done) {
         request
             .get('/')
             .expect(200, done);
