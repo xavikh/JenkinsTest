@@ -4,19 +4,25 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Build'
-        sh 'npm install'
+        nodejs('NodeJS 10.11') {
+          sh 'npm install'
+        }
+
       }
     }
     stage('Test') {
       steps {
         echo 'Test'
-        sh 'npm install newman'
-        sh 'newman postman_collection.json  --exitcode 1'
+        nodejs('NodeJS 10.11') {
+          sh 'newman run postman_collection.json  --exitcode 1'
+        }
+
       }
     }
     stage('Deploy') {
       steps {
         echo 'Deploy'
+        sh 'ssh userName@development-server-ip && cd /your-project-path && git pull       && npm install -g pm2 &&  npm install --production && pm2 restart all'
       }
     }
   }
