@@ -25,6 +25,8 @@ pipeline {
           steps {
             nodejs('NodeJS 10.11') {
               sh 'npm run test-coverage'
+              sh 'istanbul report cobertura --root coverage/ --dir ./'
+              cobertura(coberturaReportFile: 'coverage.xml')
             }
 
           }
