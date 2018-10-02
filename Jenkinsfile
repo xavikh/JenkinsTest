@@ -13,8 +13,10 @@ pipeline {
     stage('Test') {
       steps {
         echo 'Test'
-        sh 'npm install newman'
-        sh 'newman postman_collection.json  --exitcode 1'
+        nodejs('NodeJS 10.11') {
+          sh 'newman postman_collection.json  --exitcode 1'
+        }
+
       }
     }
     stage('Deploy') {
