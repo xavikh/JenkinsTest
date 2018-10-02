@@ -26,11 +26,9 @@ pipeline {
             nodejs('NodeJS 10.11') {
               sh 'npm run test-coverage'
               sh 'istanbul report cobertura --root coverage/ --dir ./'
-              sh 'ls'
               cobertura(coberturaReportFile: 'cobertura-coverage.xml')
             }
 
-            sh 'ls coverage/'
           }
         }
       }
@@ -39,7 +37,7 @@ pipeline {
       steps {
         echo 'Deploy'
         input(message: 'Deploy?', ok: 'Go, go, go!')
-        sh 'ssh userName@development-server-ip && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
+        sh '#ssh superamo@192.168.0.24 && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
       }
     }
   }
