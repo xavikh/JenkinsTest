@@ -7,6 +7,7 @@ pipeline {
         nodejs('NodeJS 10.11') {
           sh 'npm install'
         }
+
       }
     }
     stage('Test') {
@@ -14,6 +15,7 @@ pipeline {
         echo 'Test'
         nodejs('NodeJS 10.11') {
           sh 'npm test'
+          junit(testResults: 'test-results.xml', healthScaleFactor: 1)
         }
 
       }
