@@ -4,7 +4,10 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Build'
-        sh 'npm install'
+        nodejs('NodeJS 10.11') {
+          sh 'npm install'
+        }
+
       }
     }
     stage('Test') {
