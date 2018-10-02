@@ -37,6 +37,9 @@ pipeline {
       steps {
         echo 'Deploy'
         input(message: 'Deploy?', ok: 'Go, go, go!')
+        sshagent (credentials: ['superamo']) {
+            sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 uname -a'
+        }
         sh '#ssh superamo@192.168.0.24 && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
       }
     }
