@@ -18,11 +18,13 @@ pipeline {
           junit(testResults: 'test-results.xml', healthScaleFactor: 1)
         }
 
+        sh 'npm run test-coverage'
       }
     }
     stage('Deploy') {
       steps {
         echo 'Deploy'
+        input 'Confirm deploy'
         sh 'ssh userName@development-server-ip && cd /your-project-path && git pull && npm install -g pm2 && npm install --production && pm2 restart all'
       }
     }
