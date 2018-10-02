@@ -14,7 +14,7 @@ pipeline {
       steps {
         echo 'Test'
         nodejs('NodeJS 10.11') {
-          sh 'newman postman_collection.json  --exitcode 1'
+          sh 'newman run postman_collection.json  --exitcode 1'
         }
 
       }
