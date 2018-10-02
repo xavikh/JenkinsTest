@@ -11,14 +11,24 @@ pipeline {
       }
     }
     stage('Test') {
-      steps {
-        echo 'Test'
-        nodejs('NodeJS 10.11') {
-          sh 'npm test'
-          junit(testResults: 'test-results.xml', healthScaleFactor: 1)
-        }
+      parallel {
+        stage('Test') {
+          steps {
+            nodejs('NodeJS 10.11') {
+              sh 'npm test'
+              junit(testResults: 'test-results.xml', healthScaleFactor: 1)
+            }
 
-        sh 'npm run test-coverage'
+          }
+        }
+        stage('Coverage') {
+          steps {
+            nodejs('Node 10.11') {
+              sh 'npm run test-coverage'
+            }
+
+          }
+        }
       }
     }
     stage('Deploy') {
