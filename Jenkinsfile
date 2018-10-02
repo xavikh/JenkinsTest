@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Coverage') {
           steps {
-            nodejs('Node 10.11') {
+            nodejs('NodeJS 10.11') {
               sh 'npm run test-coverage'
             }
 
