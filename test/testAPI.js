@@ -1,5 +1,5 @@
 
-const app = require('../index');
+const app = require('../app');
 const request = require('supertest')(app);
 
 

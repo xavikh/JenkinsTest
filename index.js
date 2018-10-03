@@ -1,15 +1,7 @@
 'use strict';
 
-const express = require('express');
+const app = require('app');
 
-const app = express();
-
-app.get('/', (req, res) => {
-    res.status(200).send({name: "Hellou!"});
+app.listen(3000, () => {
+    console.log('Server running');
 });
-
-// app.listen(3000, () => {
-//     console.log('Server running');
-// });
-
-module.exports = app;
