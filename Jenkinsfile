@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  def
   stages {
     stage('Build') {
       def gitUrl = 'https://github.com/xavikh/PracticaSI.git'
