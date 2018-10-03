@@ -36,7 +36,7 @@ pipeline {
         sh '#zip -q -r repo.zip ./'
         archiveArtifacts artifacts: 'repo.zip', allowEmptyArchive: true
         sshagent(credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
-          sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 "screen -ls | grep '(Detached)' | awk 'sys {screen -S $1 -X quit}' && cd ~/JenkinsTest && git pull && npm install --production && screen -A -m -d -S FridgeAPI npm start"'
+          sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 "pkill screen && cd ~/JenkinsTest && git pull && npm install --production && screen -A -m -d -S FridgeAPI npm start"'
         }
       }
     }
