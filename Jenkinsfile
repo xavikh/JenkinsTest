@@ -1,13 +1,14 @@
 pipeline {
   agent any
+  def
   stages {
     stage('Build') {
+      def gitUrl = 'https://github.com/xavikh/PracticaSI.git'
       steps {
         echo 'Build'
         nodejs('NodeJS 10.11') {
           sh 'npm install'
         }
-
       }
     }
     stage('Test') {
@@ -35,13 +36,12 @@ pipeline {
     stage('Deploy') {
       steps {
         input(message: 'Deploy?', ok: 'Go, go, go!')
-        sh 'zip -q -r repo.zip ./'
+        sh '#zip -q -r repo.zip ./'
         archiveArtifacts artifacts: 'repo.zip', allowEmptyArchive: true
         sshagent(credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
           sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 uname -a'
-          sh 'cd ~/ && git clone ' + scm.getUserRemoteConfigs() + ' && npm install -g pm2 && npm install --production && pm2 restart all'
+          sh 'cd ~/ && git clone ' + gitUrl + ' && npm install -g pm2 && npm install --production && pm2 restart all'
         }
-
       }
     }
   }
