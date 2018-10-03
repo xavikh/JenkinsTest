@@ -8,8 +8,4 @@ app.get('/', (req, res) => {
     res.status(200).send({name: "Hellou!"});
 });
 
-app.listen(3000, () => {
-    console.log('Server running');
-});
-
 module.exports = app;
