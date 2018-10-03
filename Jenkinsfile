@@ -2,9 +2,11 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      def gitUrl = 'https://github.com/xavikh/PracticaSI.git'
       steps {
         echo 'Build'
+        script {
+          def gitUrl = 'https://github.com/xavikh/PracticaSI.git'
+        }
         nodejs('NodeJS 10.11') {
           sh 'npm install'
         }
