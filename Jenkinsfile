@@ -36,7 +36,7 @@ pipeline {
         sh '#zip -q -r repo.zip ./'
         archiveArtifacts artifacts: 'repo.zip', allowEmptyArchive: true
         sshagent(credentials: ['182b0b03-94bc-40f7-bbac-e811b998e005']) {
-          sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 "cd ~/JenkinsTest && git pull && npm install --production && NODE_ENV=production pm2 startOrRestart npm start"'
+          sh 'ssh -o StrictHostKeyChecking=no -l superamo 192.168.0.24 "cd ~/JenkinsTest && git pull && npm install --production && NODE_ENV=production pm2 startOrRestart index.js"'
         }
       }
     }
